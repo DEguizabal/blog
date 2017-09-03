@@ -9,18 +9,19 @@
 </head>
 
 <body>
-    
-    @include('admin.template.partials.nav')
+    <div class="container">
+        @include('admin.template.partials.nav')
 
-    <section>
-    
-        @yield('content')
-    
-    </section>
+        <section>
+        
+            @yield('content')
+        
+        </section>
 
-    <footer>
-    
-    </footer>
+        <footer>
+        
+        </footer>
+    </div>
 
     <script src="{{ asset('jquery/jquery.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>

@@ -18,7 +18,7 @@
         <ul class="nav navbar-nav">
           <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
           <li><a href="#">Inicio</a></li>
-          <li><a href="#">Usuarios</a></li>
+          <li><a href="admin/users">Usuarios</a></li>
           <li><a href="#">Categorias</a></li>
           <li><a href="#">Articulos</a></li>
           <li><a href="#">Imagenes</a></li>

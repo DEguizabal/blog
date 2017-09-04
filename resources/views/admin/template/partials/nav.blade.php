@@ -17,12 +17,12 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-          <li><a href="#">Inicio</a></li>
+          <li><a href="{{ asset('') }}">Inicio</a></li>
           <li><a href="{{ asset('admin/users') }}">Usuarios</a></li>
-          <li><a href="#">Categorias</a></li>
-          <li><a href="#">Articulos</a></li>
-          <li><a href="#">Imagenes</a></li>
-          <li><a href="#">Tag</a></li>
+          <li><a href="{{ asset('admin/categories') }}">Categorias</a></li>
+          <li><a href="{{ asset('admin/articules') }}">Articulos</a></li>
+          <li><a href="{{ asset('admin/images') }}">Imagenes</a></li>
+          <li><a href="{{ asset('admin/tags') }}">Tag</a></li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">

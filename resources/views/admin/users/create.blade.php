@@ -6,6 +6,17 @@
 
     {!! Form::open(['route' => ['users.store'], 'method' => 'POST']) !!}
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+
         <div class="form-group">
         
             {!! Form::label('name','Nombre') !!}

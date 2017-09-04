@@ -30,7 +30,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="" class="btn btn-danger">Editar</a>
+                            <a href="{{ route('users.edit',$user->id)}}" class="btn btn-danger">Editar</a>
                             <a href="{{ route('users.destroy',$user->id)}}" onclick="return confirm('¿Está seguro?')"class="btn btn-warning">Eliminar</a>
                         </td>
                     </tr>

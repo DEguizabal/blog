@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
-
+//prefix para que en las rutas de todo el grupo sea localhost/admin/...
     Route::resource('users','UsersController');
     Route::get('users/{id}/destroy',[
         'uses' => 'UsersController@destroy',
@@ -35,6 +35,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
         'uses' => 'TagsController@destroy',
         'as' => 'tags.destroy'
     ]);
+
+    Route::resource('articles','ArticlesController');
 
 
 });

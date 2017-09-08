@@ -21,7 +21,7 @@
           <li><a href="{{ asset('') }}">Inicio</a></li>
           <li><a href="{{ asset('admin/users') }}">Usuarios</a></li>
           <li><a href="{{ asset('admin/categories') }}">Categorias</a></li>
-          <li><a href="{{ asset('admin/articules') }}">Articulos</a></li>
+          <li><a href="{{ asset('admin/articles') }}">Articulos</a></li>
           <li><a href="{{ asset('admin/images') }}">Imagenes</a></li>
           <li><a href="{{ asset('admin/tags') }}">Tag</a></li>
           <!-- <li class="dropdown">

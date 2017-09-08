@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Category;
 use App\Tag;
-use Laracasts\Flash\Flash;
 
-class TagsController extends Controller
+class ArticlesController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $tags = Tag::search($request)->orderBy('id','ASC')->paginate(10);
-        return view('admin.tags.index')->with('tags',$tags);
+        //
     }
 
     /**
@@ -24,7 +28,13 @@ class TagsController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        
+        $categories = Category::orderBy('name','ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
+        return view('admin.articles.create')->with([
+            'tags' => $tags,
+            'categories'=> $categories
+        ]);
     }
 
     /**
@@ -35,16 +45,10 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:tags|max:120',
-        ]);
-
-        $tag = new Tag($request->all());
-        $tag->save();
-
-        Flash("Se ah registrado ".$tag->name. " con exito")->success();
-
-        return redirect()->route('tags.index');
+        $file = $request->file('image');
+        $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();
+        $path = public_path() . '/images/articles/';
+        $file->move($path, $name);
 
     }
 
@@ -67,8 +71,7 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
-        return view('admin.tags.edit')->with('tag',$tag);
+        //
     }
 
     /**
@@ -80,12 +83,7 @@ class TagsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tag = Tag::find($id);
-        $tag->name = $request->name;
-        $tag->save();
-
-        flash("El usuario " . $tag->name . " a sido editado")->success();
-        return redirect()->route('tags.index');
+        //
     }
 
     /**
@@ -96,10 +94,6 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::find($id);
-        $tag->delete();
-
-        flash("El usuario " . $tag->name . " a sido eliminado")->warning();
-        return redirect()->route('tags.index');
+        //
     }
 }

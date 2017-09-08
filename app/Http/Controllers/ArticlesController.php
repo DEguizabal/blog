@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 
 use App\Category;
 use App\Tag;
+use App\Article;
+
+use App\Image;
 
 class ArticlesController extends Controller
 {
@@ -29,6 +32,7 @@ class ArticlesController extends Controller
     public function create()
     {
         
+        
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
         return view('admin.articles.create')->with([
@@ -45,10 +49,31 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('image');
-        $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();
-        $path = public_path() . '/images/articles/';
-        $file->move($path, $name);
+        //dd($request->tags);
+        if($request->file('image')){
+            $file = $request->file('image');
+            $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path() . '/images/articles/';
+            $file->move($path, $name);
+        }
+        
+        $article = new Article($request->all());
+
+        //$article->article_id = $request->article_id;
+        $article->user_id = \Auth::user()->id;
+
+        //dd($article->all());
+        $article->save();
+
+        $article->tags()->sync($request->tags);
+        //sync para agregar datos a la tabla pivot
+
+        $image= new Image();
+        $image->name = $name    ;
+        $image->article()->associate($article);
+        //associate para asociar la lalve foranea
+        //$image->article_id = $article->id;
+        $image->save();
 
     }
 

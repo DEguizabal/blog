@@ -5,7 +5,7 @@
 @section('content')
 
 {!! Form::open(['route' => ['articles.store'], 'method' => 'POST', 'files'=> true]) !!}
-
+//se le agrega 'files'=> true para agregar archivos al formulario y funcione el getClientOriginalExtension()
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -41,8 +41,8 @@
 
         <div class="form-group">
         
-            {!! Form::label('tag','Tag') !!}
-            {!! Form::select('tag',$tags,null ,['class' => 'form-control','multiple', 'required']) !!}
+            {!! Form::label('tags','Tags') !!}
+            {!! Form::select('tags[]',$tags,null ,['class' => 'form-control','multiple', 'required']) !!}
             
         </div>
 

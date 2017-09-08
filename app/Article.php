@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Article extends Model
 {
 
-    use Sluggable;
+    /*use Sluggable;
 
     public function sluggable()
     {
@@ -17,7 +17,7 @@ class Article extends Model
                 'source' => 'title'
             ]
         ];
-    }
+    }*/
     
 
     protected $table = "articles";

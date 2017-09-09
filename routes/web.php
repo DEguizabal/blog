@@ -37,7 +37,10 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
     ]);
 
     Route::resource('articles','ArticlesController');
-
+    Route::get('articles/{id}/destroy',[
+        'uses' => 'ArticlesController@destroy',
+        'as' => 'articles.destroy'
+    ]);
 
 });
 Auth::routes();

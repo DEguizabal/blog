@@ -83,7 +83,7 @@ class ArticlesController extends Controller
 
 
         $image= new Image();
-        $image->name = $name    ;
+        $image->name = $name;
         $image->article()->associate($article);
         //associate para asociar la llave foranea
         //$image->article_id = $article->id;
@@ -113,7 +113,22 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        $article->category; 
+        $categories = Category::orderby('name','DESC')->pluck('name','id');
+        $tags = Tag::orderby('name','DESC')->pluck('name','id');
+
+        $my_tags = $article->tags->pluck('id')->ToArray();
+        
+        //dd($my_tags);
+        //ToArray se convierte deobjeto a array
+
+        return view('admin.articles.edit')->with([
+            'categories' => $categories,
+            'article' => $article,
+            'tags' => $tags,
+            'my_tags' => $my_tags
+        ]);
     }
 
     /**
@@ -125,7 +140,16 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $article->fill($request->all());
+        $article->save();
+
+        $article->tags()->sync($request->tags);
+
+        Flash("Se ah editado el articulo ".$article->title. " con exito")->success();
+        
+            return redirect()->route('articles.index');
+
     }
 
     /**
@@ -136,6 +160,12 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+
+        Flash("Se ah eliminado el articulo ".$article->title. " con exito")->success();
+        
+            return redirect()->route('articles.index');
+
     }
 }

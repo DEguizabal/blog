@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>@yield('title','default')| Panel de Administracion</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ asset('chosen/chosen.css')}}">
+    <link rel="stylesheet" href="{{ asset('trumbowyg/dist/ui/trumbowyg.css')}}">
 
 </head>
 
@@ -22,9 +24,21 @@
         
         </footer>
     </div>
-
+    <!--documentacion: 
+        https://harvesthq.github.io/chosen/
+        https://alex-d.github.io/Trumbowyg/documentation/
+    
+    
+    -->
+  
     <script src="{{ asset('jquery/jquery.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('chosen/chosen.jquery.js')}}"></script>
+
+    <script src="{{ asset('trumbowyg/dist/trumbowyg.js')}}"></script>
+
+    
+    @yield('js')
 
 </body>
 

@@ -5,7 +5,7 @@
 @section('content')
 
 {!! Form::open(['route' => ['articles.store'], 'method' => 'POST', 'files'=> true]) !!}
-//se le agrega 'files'=> true para agregar archivos al formulario y funcione el getClientOriginalExtension()
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -28,21 +28,21 @@
         <div class="form-group">
         
             {!! Form::label('category_id','Categoria') !!}
-            {!! Form::select('category_id',$categories,null ,['class' => 'form-control','placeholder'=>'Seleccione una opcion', 'required']) !!}
+            {!! Form::select('category_id',$categories,null ,['class' => 'form-control select-cat','data-placeholder'=>'asddqwe' ,'required']) !!}
             
         </div>
 
         <div class="form-group">
         
             {!! Form::label('content','Contenido') !!}
-            {!! Form::textarea('content',null,['class' => 'form-control','placeholder'=>'Nombre del articulo', 'required']) !!}
+            {!! Form::textarea('content',null,['class' => 'form-control textarea-content','placeholder'=>'Nombre del articulo', 'required']) !!}
             
         </div>
 
         <div class="form-group">
         
             {!! Form::label('tags','Tags') !!}
-            {!! Form::select('tags[]',$tags,null ,['class' => 'form-control','multiple', 'required']) !!}
+            {!! Form::select('tags[]',$tags,null ,['class' => 'form-control select-tag','multiple', 'required']) !!}
             
         </div>
 
@@ -64,5 +64,21 @@
     {!! Form::close() !!}
 
 
+
+@endsection
+
+@section('js')
+
+    <script>
+        $('.select-tag').chosen({
+            placeholder_text_multiple:'seleccione los tags deseados...'
+        });
+
+        $('.select-cat').chosen({
+            placeholder_text_single:'seleccione la categoria deseada...'
+        });
+
+        //$('.textarea-content').trumbowyg();
+    </script>
 
 @endsection

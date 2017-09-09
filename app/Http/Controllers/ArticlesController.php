@@ -12,6 +12,8 @@ use App\Article;
 
 use App\Image;
 
+use Laracasts\Flash\Flash;
+
 class ArticlesController extends Controller
 {
     /**
@@ -21,7 +23,11 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.articles.index')->with([
+            'article' => $article,
+            'tags' => $tags,
+            'categories'=> $categories
+        ]);
     }
 
     /**
@@ -34,6 +40,7 @@ class ArticlesController extends Controller
         
         
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
+        //pluck para mostrar listado de lo que le paso
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
         return view('admin.articles.create')->with([
             'tags' => $tags,
@@ -52,29 +59,32 @@ class ArticlesController extends Controller
         //dd($request->tags);
         if($request->file('image')){
             $file = $request->file('image');
-            $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path() . '/images/articles/';
-            $file->move($path, $name);
+            $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();//nombre de la imagen
+            $path = public_path() . '/images/articles/';//enlace donde piensa guardar las imagenes
+            $file->move($path, $name);//movimiento de las imagenes
         }
         
         $article = new Article($request->all());
-
         //$article->article_id = $request->article_id;
         $article->user_id = \Auth::user()->id;
-
         //dd($article->all());
         $article->save();
+
 
         $article->tags()->sync($request->tags);
         //sync para agregar datos a la tabla pivot
 
+
         $image= new Image();
         $image->name = $name    ;
         $image->article()->associate($article);
-        //associate para asociar la lalve foranea
+        //associate para asociar la llave foranea
         //$image->article_id = $article->id;
         $image->save();
 
+        Flash("Se ah registrado ".$article->title. " con exito")->success();
+
+        return redirect()->route('articles.index');
     }
 
     /**

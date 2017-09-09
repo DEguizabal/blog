@@ -25,8 +25,8 @@
         </footer>
     </div>
     <!--documentacion: 
-        https://harvesthq.github.io/chosen/
-        https://alex-d.github.io/Trumbowyg/documentation/
+        https://harvesthq.github.io/chosen/ - diseño cajas
+        https://alex-d.github.io/Trumbowyg/documentation/ - diseño textarea
     
     
     -->

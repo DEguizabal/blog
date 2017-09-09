@@ -21,12 +21,19 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $articles = Article::Search($request)->orderBy('id','DESC')->paginate(5);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->user;
+
+        });
+
         return view('admin.articles.index')->with([
-            'article' => $article,
-            'tags' => $tags,
-            'categories'=> $categories
+            'articles' => $articles,
+
         ]);
     }
 

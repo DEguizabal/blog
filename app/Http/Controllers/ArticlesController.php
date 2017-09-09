@@ -45,7 +45,6 @@ class ArticlesController extends Controller
     public function create()
     {
         
-        
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
         //pluck para mostrar listado de lo que le paso
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
@@ -63,6 +62,16 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'title' => 'required|unique:articles|max:120',
+            'category_id' => 'required',
+            'content' => 'required|max:240',
+
+            'image' => 'image|required'
+        ]);
+
+
         //dd($request->tags);
         if($request->file('image')){
             $file = $request->file('image');
@@ -113,6 +122,7 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
+
         $article = Article::find($id);
         $article->category; 
         $categories = Category::orderby('name','DESC')->pluck('name','id');
@@ -140,8 +150,17 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'title' => 'required|unique:articles|max:120',
+            'category_id' => 'required',
+            'content' => 'required|max:240',
+
+            'image' => 'image|required'
+        ]);
         $article = Article::find($id);
         $article->fill($request->all());
+        //fill para sobreescribir 
         $article->save();
 
         $article->tags()->sync($request->tags);

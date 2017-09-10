@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('/welcome');
-});
+Route::get('/', [
+    'as' => 'front.index',
+    'uses' => 'FrontController@index'
+]);
 
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
 //prefix para que en las rutas de todo el grupo sea localhost/admin/...
+
+    Route::get('/', ['as' => 'admin.index',function () {
+        return view('admin.index');
+    }]);
+
     Route::resource('users','UsersController');
     Route::get('users/{id}/destroy',[
         'uses' => 'UsersController@destroy',

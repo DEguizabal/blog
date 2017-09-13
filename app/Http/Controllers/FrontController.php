@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Article;
+use App\Tag;
+use App\Category;
 use Laracasts\Flash\Flash;
 
 class FrontController extends Controller
@@ -18,14 +20,56 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('id','DESC')->paginate(4);
 
+        $articles = Article::orderBy('id','DESC')->paginate(4);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });
         return view('front.index')->with([
 
-            'articles' => $articles
+            'articles' => $articles,
+
 
         ]);
     }
+
+    public function searchCategory($name){
+
+        $tags = Tag::all();
+        $articles = Article::orderBy('id','DESC')->paginate(4);
+        $categories = Category::SearchCategory($name)->get();
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });
+        return view('front.index')->with([
+
+            'articles' => $articles,
+            'categories' => $categories,
+            'tags' => $tags
+        ]);
+    }
+
+    public function searchTag($name){
+        
+        $articles = Article::orderBy('id','DESC')->paginate(4);
+        $categories = Category::all();
+        $tags = Tag::SearchTag($name)->get();
+                $articles->each(function($articles){
+                    $articles->tag;
+                    
+                    $articles->images;
+                });
+                return view('front.index')->with([
+        
+                    'articles' => $articles,
+                    'categories' => $categories,
+                    'tags' => $tags
+                ]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

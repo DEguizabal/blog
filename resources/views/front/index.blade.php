@@ -16,14 +16,15 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <a href="#" class=" ">
-                                        <img src="{{ asset('images/articles/blogfacilito_1504906244.png') }}" class="img-responsive img-article">
-
+                                        @foreach($article->images as $image)
+                                            <img src="{{ asset('images/articles/'.$image->name) }}" class="img-responsive img-article">
+                                        @endforeach
                                     </a>
                                     <h3 class="text-center">{{ $article->title }}</h3>
 
                                     <hr>
                                     <i class="fa fa-folder-open-o"></i>
-                                        <a href="">Category</a>
+                                        <a href="{{ route('front.search.category', $article->category->name) }}">{{ $article->category->name }}</a>
                                         <div class="pull-right">
                                             <i class="fa fa-clock-o"></i>Hace 3 minutos
                                         </div>
@@ -35,9 +36,12 @@
 
                     </div>
 
-                    
+                    {{ $articles->render() }}
                 
                 </div>            
+
+            @include('front.partials.aside')
+     
             </div>
 
     </div>

@@ -16,6 +16,16 @@ Route::get('/', [
     'uses' => 'FrontController@index'
 ]);
 
+Route::get('categories/{name}', [
+    'as' => 'front.search.category',
+    'uses' => 'FrontController@searchCategory'
+]);
+
+Route::get('tags/{name}', [
+    'as' => 'front.search.tag',
+    'uses' => 'FrontController@searchTag'
+]);
+
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
 //prefix para que en las rutas de todo el grupo sea localhost/admin/...

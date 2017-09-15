@@ -36,9 +36,9 @@ class FrontController extends Controller
 
     public function searchCategory($name){
 
-        $tags = Tag::all();
-        $articles = Article::orderBy('id','DESC')->paginate(4);
-        $categories = Category::SearchCategory($name)->get();
+        $category = Category::SearchCategory($name)->first();
+        //firt para convertir la coleccion a objeto
+        $articles = $category->articles()->paginate(4);
         $articles->each(function($articles){
             $articles->category;
             $articles->images;
@@ -46,27 +46,23 @@ class FrontController extends Controller
         return view('front.index')->with([
 
             'articles' => $articles,
-            'categories' => $categories,
-            'tags' => $tags
+
         ]);
     }
 
     public function searchTag($name){
         
-        $articles = Article::orderBy('id','DESC')->paginate(4);
-        $categories = Category::all();
-        $tags = Tag::SearchTag($name)->get();
-                $articles->each(function($articles){
-                    $articles->tag;
-                    
-                    $articles->images;
-                });
-                return view('front.index')->with([
-        
-                    'articles' => $articles,
-                    'categories' => $categories,
-                    'tags' => $tags
-                ]);
+        $tag = Tag::SearchTag($name)->first();
+        $articles = $tag->articles()->paginate(4);
+        $articles->each(function($articles){
+            $articles->category;
+            $articles->images;
+        });
+        return view('front.index')->with([
+
+            'articles' => $articles,
+
+        ]);
     }
 
 

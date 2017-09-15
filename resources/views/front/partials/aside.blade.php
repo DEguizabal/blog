@@ -40,7 +40,7 @@
 
                         <li class="list-group-item">
                             <span class="badge">{{ $tag->articles->count() }}</span>
-                            <a href=" {{ route('front.search.category',$category->name) }}">
+                            <a href=" {{ route('front.search.tag',$tag->name) }}">
                                 {{ $tag->name }}
                             </a>
 

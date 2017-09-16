@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3 class="title-front left">{{ $article->title }}</h3>
+<h2 class="title-front left">{{ $article->title }}</h2>
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">

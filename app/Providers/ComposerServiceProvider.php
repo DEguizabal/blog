@@ -16,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view::composer(["front.index", "front.aside"],function($view){
+        view::composer(["front.index", "front.article"],function($view){
             
             $categories = Category::orderBy('name','desc')->get();
             $tags = Tag::orderBy('name','desc')->get();

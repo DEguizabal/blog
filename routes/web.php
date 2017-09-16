@@ -26,6 +26,11 @@ Route::get('tags/{name}', [
     'uses' => 'FrontController@searchTag'
 ]);
 
+Route::get('articles/{id}',[
+    'as' => 'front.view.article',
+    'uses' => 'FrontController@viewArticle'
+]);
+
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function(){
 //prefix para que en las rutas de todo el grupo sea localhost/admin/...

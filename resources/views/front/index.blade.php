@@ -15,13 +15,14 @@
                         <div class=col-md-6>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <a href="#" class=" ">
+                                    <a href="{{ route('front.view.article', $article->id)}}" class=" ">
                                         @foreach($article->images as $image)
                                             <img src="{{ asset('images/articles/'.$image->name) }}" class="img-responsive img-article">
                                         @endforeach
                                     </a>
-                                    <h3 class="text-center">{{ $article->title }}</h3>
-
+                                        <a href="{{ route('front.view.article', $article->id)}}">
+                                            <h3 class="text-center">{{ $article->title }}</h3>
+                                        </a>
                                     <hr>
                                     <i class="fa fa-folder-open-o"></i>
                                         <a href="{{ route('front.search.category', $article->category->name) }}">{{ $article->category->name }}</a>

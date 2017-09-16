@@ -17,6 +17,12 @@ class Category extends Model
     
         }
 
+        public function scopeSearch($query, $dato){
+            
+            return $query->where('name','LIKE', "%$dato->buscar%");
+            
+        }
+
         public function scopeSearchCategory($query,$name){
 
             return $query->where('name','=',$name);

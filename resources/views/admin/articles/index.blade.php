@@ -15,7 +15,8 @@
     {!! form::close() !!}
 
 
-    <div class="container">
+<br><br><br>
+    <div class="table table-bordered table-responsive">
         <table class="table">
             <thead>
                 <th>Id</th>
@@ -30,7 +31,7 @@
                 @foreach($articles as $art)
                     <tr>
                         <td>{{ $art->id }}</td>
-                        <td>{{ $art->title }}</td>
+                        <td class="ancho">{{ $art->title }}</td>
                         <td>{{ $art->category->name }}</td>
                         <td>{{ $art->user->name }}</td>
                         
@@ -43,8 +44,9 @@
             </tbody>
         </table>
 
-    {!! $articles->render() !!}
-
+        
     </div>
+    {!! $articles->render() !!}
+    <br>
 
 @endsection

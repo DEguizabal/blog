@@ -6,7 +6,8 @@
 
     <a href="{{ route('users.create') }}" class="btn btn-info">Registrar nuevo</a>
 
-    <div class="container">
+    <br><br><br>
+    <div class="table table-bordered table-responsive">
         <table class="table">
             <thead>
                 <th>ID</th>

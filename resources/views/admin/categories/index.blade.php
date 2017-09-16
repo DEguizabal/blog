@@ -6,7 +6,16 @@
 
     <a href="{{ route('categories.create') }}" class="btn btn-info">Registrar nuevo</a>
 
-    <div class="container">
+    {!! Form::open(['route' => 'categories.index', 'method' => 'GET', 'class' => 'navbar-form pull-right']) !!}
+
+        <div class="input-group" >
+            {!! Form::text('buscar', null, ['class' => 'form-control','placeholder' => 'Buscar','aria-describedby'=>'search']) !!}
+            <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+        </div>
+    {!! form::close() !!}
+
+    <br><br><br>
+    <div class="table table-bordered table-responsive">
         <table class="table">
             <thead>
                 <th>Id</th>

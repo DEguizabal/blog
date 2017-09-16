@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{ asset('chosen/chosen.css')}}">
     <link rel="stylesheet" href="{{ asset('trumbowyg/dist/ui/trumbowyg.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/css.css')}}">
 
 </head>
 
-<body>
-    <header>
-    <div class="container">
+<body class="global">
+    <header >
+    <div class="container global">
         @include('front.template.partials.header')
     </header>
 
